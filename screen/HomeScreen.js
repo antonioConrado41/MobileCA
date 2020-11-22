@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, TextInput, Button} from 'react-native';
-import apiKey from './key.js';
+import apiKey from '../key/key.js';
 import * as Location from 'expo-location';
 
 const HomeScreen = () => {

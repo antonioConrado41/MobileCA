@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import apiKey from './key.js';
-import apiCurrencyKey from './keyCurrency.js'
-import apiKeyWeather from './keyWeather.js'
+import apiKey from '../key/key.js';
+import apiCurrencyKey from '../key/keyCurrency.js'
+import apiKeyWeather from '../key/keyWeather.js'
 import * as Location from 'expo-location';
 import { BottomNavigation, Card, Title, Paragraph, TextInput, Button, Headline} from 'react-native-paper';
+
 
 const LocationRoute = () => {
   
@@ -31,7 +32,7 @@ const LocationRoute = () => {
       (async () => {
         if (lat !== undefined && lng !== undefined) {
           try {
-          const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat},${lng}&key=4454b2378fd142b0bfb0e2ec782a7bbb`)
+          const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat},${lng}&key=${apiKey}`)
           const resultJson = await result.json();
           setCity(resultJson.results[0].components.county),
           setCountry(resultJson.results[0].components.country);
@@ -106,7 +107,7 @@ const CurrencyRoute = () => {
       (async () => {
         if (lat !== undefined && lng !== undefined) {
           try {
-            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat},${lng}&key=4454b2378fd142b0bfb0e2ec782a7bbb`)
+            const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat},${lng}&key=${apiKey}`)
             const resultJson = await result.json();
             setCurrency(resultJson.results[0].annotations.currency.iso_code);
           } catch (e) {

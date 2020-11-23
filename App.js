@@ -13,23 +13,13 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-        name="Mobile CA"
-        component={MenuScreen}
-        />
-         <Stack.Screen
-        name="MyPlaces"
-        component={MyPlaces}
+          name="Mobile CA"
+          component={MenuScreen}
         />
         <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{
-            title: 'HomeScreen',
-            headerTitleStyle: { alignSelf: 'center' },
-          }}
+          name="MyPlaces"
+          component={MyPlaces}
         />
-        
-        
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -4,14 +4,14 @@ import apiKey from '../key/key.js';
 import apiCurrencyKey from '../key/keyCurrency.js'
 import apiKeyWeather from '../key/keyWeather.js'
 import * as Location from 'expo-location';
-import { BottomNavigation, Card, Title, Paragraph, TextInput, Button} from 'react-native-paper';
+import { BottomNavigation, Card, Title, Paragraph, TextInput, Button } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 
 
 
 const LocationRoute = (props) => {
 
-  const {navigation} = props;
+  const { navigation } = props;
   const [lat, setLat] = React.useState(null);
   const [lng, setLng] = React.useState(null);
   const [city, setCity] = useState(null);
@@ -46,7 +46,7 @@ const LocationRoute = (props) => {
 
     })();
 
-  }, [lat,lng]);
+  }, [lat, lng]);
 
   return (
 
@@ -73,12 +73,12 @@ const LocationRoute = (props) => {
             A wonderful city in: {country}</Paragraph>
         </Card.Content>
       </Card>
-      <Button icon="map" mode="contained" onPress={() => navigation.navigate('MyPlaces', {city, country})}>
-    Save Location
+      <Button icon="map" mode="contained" onPress={() => navigation.navigate('MyPlaces', { city, country })}>
+        Save Location
   </Button>
     </>
 
-    
+
 
   )
 }
@@ -112,7 +112,7 @@ const CurrencyRoute = () => {
 
   React.useEffect(() => {
     (async () => {
-      if (lat !== undefined && lng !== undefined) {
+      if (lat && lng) {
         try {
           const result = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat},${lng}&key=${apiKey}`)
           const resultJson = await result.json();
@@ -128,7 +128,7 @@ const CurrencyRoute = () => {
 
   React.useEffect(() => {
     (async () => {
-      if (lat !== undefined && lng !== undefined) {
+      if (lat && lng) {
         try {
           const result = await fetch(`https://api.currencyfreaks.com/latest?apikey=61157a41d37940f4a620eb34aa9ca29e&symbols=${currency}`)
           const resultJson = await result.json();
@@ -197,7 +197,7 @@ const WeatherRoute = () => {
 
   React.useEffect(() => {
     (async () => {
-      if (lat !== undefined && lng !== undefined) {
+      if (lat && lng) {
         try {
           const result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKeyWeather}`)
           const resultJson = await result.json();
@@ -242,18 +242,18 @@ const MenuScreen = ({ navigation }) => {
     { key: 'weather', title: 'Weather', icon: 'weather-snowy' },
   ]);
 
-  
-  const renderScene =({ route, jumpTo   }) =>{
 
-    switch(
-      route.key
-    ){
+  const renderScene = ({ route, jumpTo }) => {
+
+    switch (
+    route.key
+    ) {
       case 'location':
-        return <LocationRoute navigation={navigation} jumpTo = {jumpTo}/>
-        case 'currency':
-          return <CurrencyRoute jumpTo = {jumpTo}/>
-          case 'weather':
-            return <WeatherRoute jumpTo = {jumpTo}/>
+        return <LocationRoute navigation={navigation} jumpTo={jumpTo} />
+      case 'currency':
+        return <CurrencyRoute jumpTo={jumpTo} />
+      case 'weather':
+        return <WeatherRoute jumpTo={jumpTo} />
     }
   };
 

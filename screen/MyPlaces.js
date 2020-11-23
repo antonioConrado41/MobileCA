@@ -1,9 +1,9 @@
 import React from 'react';
-import {DataTable} from 'react-native-paper';
+import { DataTable } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Button, View} from 'react-native';
+import { Button, View } from 'react-native';
 
-const MyPlaces = ({ route }) =>{
+const MyPlaces = ({ route }) => {
     const geoData = route.params;
 
     const city = geoData.city;
@@ -12,29 +12,29 @@ const MyPlaces = ({ route }) =>{
     console.log(country);
     const [locals, setLocals] = React.useState(false);
 
-    const saveData = async () =>{
-        try{
-        let values ={
-            city: city,
-            country: country,
-        }
+    const saveData = async () => {
+        try {
+            let values = {
+                city: city,
+                country: country,
+            }
 
-        await AsyncStorage.setItem('values', JSON.stringify(values));
-        let places = JSON.parse(await AsyncStorage.getItem('places')) || [];
-        places.push(values);
-        await AsyncStorage.setItem('places', JSON.stringify(places));
-        showData();
-        }catch(e){
+            await AsyncStorage.setItem('values', JSON.stringify(values));
+            let places = JSON.parse(await AsyncStorage.getItem('places')) || [];
+            places.push(values);
+            await AsyncStorage.setItem('places', JSON.stringify(places));
+            showData();
+        } catch (e) {
             console.log(e);
         }
 
     }
 
-    const showData = async () =>{
+    const showData = async () => {
         let locations = await AsyncStorage.getItem('places') && JSON.parse(await AsyncStorage.getItem('places'));
         setLocals(locations);
     }
-    React.useEffect(() =>{
+    React.useEffect(() => {
         showData();
     }, [])
     return (
